@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque/index.css";
+@import "@fontsource-variable/instrument-sans/index.css";
+
+@theme {
+  --color-paper: #f1f2f6;
+  --color-raised: #ffffff;
+  --color-ink: #151827;
+  --color-mute: #5b6076;
+  --color-line: #d8dae5;
+  --color-accent: #3333cc;
+  --color-accent-deep: #25259e;
+  --color-marker: #ffd43b;
+  --color-danger: #b4232f;
+  --color-danger-soft: #fbe9ea;
+
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    scrollbar-gutter: stable;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  mark {
+    background: var(--color-marker);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+    box-decoration-break: clone;
+  }
+}
+
+/* Skeleton shimmer, disabled for people who prefer reduced motion. */
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-line) 25%,
+    #e9eaf1 50%,
+    var(--color-line) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Native <dialog>: backdrop + enter animation. */
+dialog.sheet {
+  margin: auto;
+}
+dialog.sheet::backdrop {
+  background: rgb(21 24 39 / 0.55);
+  backdrop-filter: blur(2px);
+}
+dialog.sheet[open] {
+  animation: sheet-in 0.22s ease-out;
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet[open] {
+    animation: none;
+  }
+}
